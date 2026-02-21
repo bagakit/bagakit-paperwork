@@ -1,0 +1,14 @@
+{
+  "v4": {
+    "h2_count": 10,
+    "h3_count": 0,
+    "example_markers": 0,
+    "has_grouped_diagnosis_h2": 0
+  },
+  "v5": {
+    "h2_count": 5,
+    "h3_count": 12,
+    "example_markers": 4,
+    "has_grouped_diagnosis_h2": 1
+  }
+}

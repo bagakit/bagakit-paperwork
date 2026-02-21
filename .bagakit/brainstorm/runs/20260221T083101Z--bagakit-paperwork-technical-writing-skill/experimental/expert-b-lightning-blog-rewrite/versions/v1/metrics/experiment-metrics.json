@@ -1,0 +1,14 @@
+{
+  "source_and_copy_identical": true,
+  "source_hash": "103913142f63861f22176b870f0e2761c8129b492a1aa3c04b1f06962b8afa81",
+  "copy_hash": "103913142f63861f22176b870f0e2761c8129b492a1aa3c04b1f06962b8afa81",
+  "candidate_hash": "040e612a5b6f255a2ab2d5c0495ae22255d9eacbf26e8f2030e5267b8dd187b0",
+  "source_char_count": 2371,
+  "candidate_char_count": 1027,
+  "source_heading_count": 13,
+  "candidate_heading_count": 7,
+  "source_list_blocks_over_5": 0,
+  "candidate_list_blocks_over_5": 0,
+  "candidate_has_claim_phrase": true,
+  "candidate_has_tool_phrase": true
+}

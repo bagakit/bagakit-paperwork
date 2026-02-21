@@ -1,0 +1,20 @@
+{
+  "v3": {
+    "chars": 1561,
+    "h2_count": 10,
+    "paragraph_blocks": 26,
+    "avg_sentence_len": 37.72,
+    "has_three_failure_modes": 1,
+    "has_four_modules": 0,
+    "has_claim_tool_validation": 1
+  },
+  "v4": {
+    "chars": 1554,
+    "h2_count": 10,
+    "paragraph_blocks": 23,
+    "avg_sentence_len": 36.38,
+    "has_three_failure_modes": 0,
+    "has_four_modules": 1,
+    "has_claim_tool_validation": 1
+  }
+}

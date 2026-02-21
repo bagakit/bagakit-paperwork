@@ -1,0 +1,22 @@
+{
+  "v2": {
+    "char_count": 2059,
+    "heading_count": 11,
+    "avg_sentence_len": 42.61,
+    "short_sentences_le_20": 4,
+    "long_sentences_ge_45": 13,
+    "transition_hits": 3,
+    "contains_failure_mode": 1,
+    "contains_user_review_gate": 1
+  },
+  "v3": {
+    "char_count": 2014,
+    "heading_count": 11,
+    "avg_sentence_len": 37.72,
+    "short_sentences_le_20": 9,
+    "long_sentences_ge_45": 10,
+    "transition_hits": 7,
+    "contains_failure_mode": 1,
+    "contains_user_review_gate": 1
+  }
+}
