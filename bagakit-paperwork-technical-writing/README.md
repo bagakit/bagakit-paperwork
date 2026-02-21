@@ -14,6 +14,14 @@ publish. This skill enforces a two-layer output model:
 It also adds an objective review layer (`review_report.md`) so quality is inspectable
 instead of subjective.
 
+Recent guardrails:
+
+- block internal directive leakage in publish article (`[[BAGAKIT]]`, stage footer)
+- require version baseline note (`keep/add/tighten`) to reduce rewrite regression
+- support baseline comparison for suspicious one-pass compression
+- compare evidence-pack density against baseline to catch framework-only rewrites
+- require agent-gate decision with severity findings
+
 ## What ships in this package
 
 - `SKILL.md`
@@ -29,7 +37,7 @@ instead of subjective.
 - `references/tpl/*.md`
   templates for article, execution appendix, and review report
 - `scripts/check-article.py`
-  objective checker for structure, placeholders, heading quality, and warning signals
+  objective checker for structure, placeholder hygiene, publish leakage, and warning signals
 - `scripts/validate-skill.sh`
   local validation entrypoint used by gate commands
 
@@ -61,8 +69,9 @@ Recommended:
 2. Outline first (`H2` in 3-5 range, `H3` as scan anchors).
 3. Draft with evidence chain.
 4. Run `check-article.py` and fix hard failures.
-5. Record warning judgments in `review_report.md`.
-6. Hand off with explicit destination and status.
+5. Run baseline comparison when previous version exists.
+6. Record warning + agent-gate judgments in `review_report.md`.
+7. Hand off with explicit destination and status.
 
 ## Quick start
 
@@ -78,6 +87,11 @@ python3 scripts/check-article.py --input references/tpl/article-template.md --st
 python3 scripts/check-article.py \
   --input article.md \
   --strict \
+  --report review_report.md
+
+python3 scripts/check-article.py \
+  --input article.md \
+  --baseline previous.md \
   --report review_report.md
 ```
 

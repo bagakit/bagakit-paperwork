@@ -13,6 +13,8 @@ Deliver technical writing that is readable for publication and actionable for ex
 - Keep writing quality explicit through objective checks and repeatable review steps.
 - Keep output split clear: publication narrative vs execution appendix.
 - Keep workflow standalone-first: core drafting and checks run locally without mandatory external systems.
+- Prevent regression by carrying forward proven strengths from prior versions.
+- Prevent high-compression rewrites from dropping baseline evidence classes.
 
 ## When to Use This Skill
 
@@ -53,6 +55,13 @@ Deliver technical writing that is readable for publication and actionable for ex
   - `outline.md`: structured outline before drafting.
   - `forum_minutes.md`: when expert-forum review is enabled.
 
+## Non-Negotiable Boundary
+
+- `article.md` is publish-only narrative.
+- Internal process metadata and directives must not appear in `article.md`.
+- Execution fields (`discussion_clear`, `user_review_status`, claim/tool validation, handoff path) belong to `execution_appendix.md`.
+- Stage/gate tracking belongs to `review_report.md` (or response footer), not to publish copy.
+
 ## Archive Gate (Completion Handoff)
 
 - Verify all required outputs exist and include concrete file paths in handoff.
@@ -65,29 +74,46 @@ Deliver technical writing that is readable for publication and actionable for ex
 1. Define reader and objective.
 - Write one sentence for target reader, one sentence for decision/action expected after reading.
 
-2. Build outline first.
+2. Run version baseline gate before drafting.
+- If prior versions exist, read previous `techniques`, gap analysis, and latest review.
+- Record a 3-column baseline note in `review_report.md`: keep / add / tighten.
+- Record baseline evidence classes in `review_report.md` (`full sample`, `hard evidence chain`, `anti-pattern`, `rollout/checklist`).
+- Do not start rewriting before this baseline note is written.
+
+3. Build outline first.
 - Keep H2 count between 3 and 5.
 - Use H3 as scan anchors (problem, mechanism, signal, action).
+- Keep planning contract in `outline.md`; do not copy planning scaffolding into publish article.
 
-3. Draft with argument order.
+4. Draft with argument order.
 - Section-level: lead with judgment.
 - Paragraph-level: evidence/mechanism first, then local conclusion.
 - End each major section with explicit action or validation signal.
+- Keep publish narrative continuous; avoid checklist-like process fields in body text.
 
-4. Split publication and execution content.
+5. Split publication and execution content.
 - Main article explains why the approach is correct.
 - Execution appendix defines how to run, verify, and recover.
+- If process fields are needed for traceability, write them only in appendix/report.
 
-5. Run objective checks.
+6. Run program hard gate checks.
 - Run `python3 scripts/check-article.py --input <article.md> --strict --report <review_report.md>`.
 - Fix all `errors` before publishing.
+- For any rewrite task, `--baseline <previous_article.md>` is required; do not skip baseline comparison.
+- Treat high-compression + evidence-class drop as release-blocking regression.
+- For high-content baseline rewrites, compression over 45% requires explicit scope-cut note; otherwise block release.
 
-6. Run optional expert-forum review for high-stakes topics.
+7. Run program warning review and agent gate.
+- Review warnings from checker with explicit decisions in `review_report.md`.
+- Score with `references/agent-gate-rubric.md` and emit findings (`P1/P2/P3` + file/line + fix direction).
+- If any `P1` remains open, status is `revise` and release is blocked.
+
+8. Run optional expert-forum review for high-stakes topics.
 - Use `lightning_talk_forum` to converge quickly.
 - Use `deep_dive_forum` when one claim is controversial or high-risk.
 - Keep references, scoring, and claim/tool validation traceable.
 
-7. Final handoff.
+9. Final handoff.
 - Publish `article.md`.
 - Store `execution_appendix.md` and `review_report.md` for downstream implementation.
 
@@ -103,11 +129,15 @@ Deliver technical writing that is readable for publication and actionable for ex
   - Exactly one H1.
   - H2 count in configured range (default 3~5).
   - No unresolved placeholders.
+  - No internal directive leakage in publish article.
+  - No high-compression rewrite regression vs baseline evidence classes.
 - Warning gates:
   - Overloaded bullet sections (continuous list items > 5).
   - Generic headings with low semantic specificity.
   - No concrete example markers in body.
+  - Evidence pack is thinner than baseline.
   - AI-tone risk phrases requiring human rewrite judgment.
+  - Suspicious content shrink relative to baseline draft.
 
 See details in `references/quality-gates.md`.
 
@@ -115,6 +145,7 @@ See details in `references/quality-gates.md`.
 
 ```bash
 python3 scripts/check-article.py --input <article.md> --strict --report <review_report.md>
+python3 scripts/check-article.py --input <article.md> --baseline <previous.md> --report <review_report.md>
 bash scripts/validate-skill.sh
 ```
 
@@ -124,11 +155,15 @@ bash scripts/validate-skill.sh
 - `references/quality-gates.md`
 - `references/writing-techniques.md`
 - `references/markdown-formatting.md`
+- `references/agent-gate-rubric.md`
 - `references/tpl/article-template.md`
 - `references/tpl/execution-appendix-template.md`
 - `references/tpl/review-report-template.md`
 
-## `[[BAGAKIT]]` Footer
+## `[[BAGAKIT]]` Footer (Non-Article Only)
+
+- Use only in response metadata or `review_report.md`.
+- Never append this footer to `article.md`.
 
 ```text
 [[BAGAKIT]]
