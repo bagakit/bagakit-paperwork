@@ -4,13 +4,13 @@
   "title": "Build bagakit-paperwork-technical-writing skill v1",
   "slug": "bagakit-paperwork-technical-writing-skill-v1",
   "goal": "Implement v1 technical writing skill with brainstorm-validated quality gates, packaging path, and docs in bagakit-paperwork.",
-  "status": "done",
+  "status": "archived",
   "base_ref": "main",
   "branch": "feat/f-20260221-bagakit-paperwork-technical-writing-skill-v1",
   "worktree_name": "wt-f-20260221-bagakit-paperwork-technical-writing-skill-v1",
   "worktree_path": ".worktrees/wt-f-20260221-bagakit-paperwork-technical-writing-skill-v1",
   "created_at": "2026-02-21T12:17:22Z",
-  "updated_at": "2026-02-21T14:04:47Z",
+  "updated_at": "2026-02-21T15:45:31Z",
   "current_task_id": null,
   "counters": {
     "gate_fail_streak": 0,
@@ -55,6 +55,21 @@
       "at": "2026-02-21T14:04:47Z",
       "action": "task_finished",
       "detail": "T-001 => done"
+    },
+    {
+      "at": "2026-02-21T15:45:31Z",
+      "action": "feat_archived",
+      "detail": "moved + cleaned"
     }
-  ]
+  ],
+  "closed_from_status": "done",
+  "archived_at": "2026-02-21T15:45:31Z",
+  "archived_cleanup": {
+    "base_ref": "main",
+    "branch_merged": true,
+    "worktree_removed": true,
+    "worktree_pruned": true,
+    "branch_deleted": true,
+    "note": "worktree removed+pruned; branch deleted only when merged into base"
+  }
 }

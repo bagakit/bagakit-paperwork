@@ -1,15 +1,15 @@
 {
   "version": 1,
   "generated_by": "bagakit-feat-task-harness",
-  "updated_at": "2026-02-21T14:04:47Z",
+  "updated_at": "2026-02-21T15:45:31Z",
   "feats": [
     {
       "feat_id": "f-20260221-bagakit-paperwork-technical-writing-skill-v1",
       "title": "Build bagakit-paperwork-technical-writing skill v1",
-      "status": "done",
+      "status": "archived",
       "branch": "feat/f-20260221-bagakit-paperwork-technical-writing-skill-v1",
       "worktree_name": "wt-f-20260221-bagakit-paperwork-technical-writing-skill-v1",
-      "updated_at": "2026-02-21T14:04:47Z"
+      "updated_at": "2026-02-21T15:45:31Z"
     }
   ]
 }
