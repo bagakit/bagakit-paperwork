@@ -3,7 +3,7 @@
 JSON SSOT: `tasks.json`
 
 ## Task Checklist
-- [ ] T-001 Implement first scoped change for this feat
+- [x] T-001 Build v1 bagakit-paperwork-technical-writing skill package
 
 ## Status Legend
 - todo
