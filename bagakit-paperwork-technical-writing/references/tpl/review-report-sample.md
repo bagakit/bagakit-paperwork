@@ -2,10 +2,10 @@
 
 ## Metrics
 - H1 count: 1
-- H2 count: 4
-- H3 count: 8
-- Word count: 38
+- H2 count: 5
+- H3 count: 11
+- Word count: 157
 - Long list blocks (>5): 0
 
 ## Issues
-- [warning] NO_EXAMPLE: no explicit example marker found in article body
+- none

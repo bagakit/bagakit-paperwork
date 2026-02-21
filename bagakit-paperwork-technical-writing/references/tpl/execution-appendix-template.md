@@ -4,6 +4,7 @@
 
 - In scope:
 - Out of scope:
+- Assumptions:
 
 ## Operational fields
 
@@ -15,14 +16,34 @@
 | tool_usability |  |  |
 | handoff_destination |  |  |
 
+## Evidence map
+
+| Claim | Evidence source | Verification method |
+| --- | --- | --- |
+|  |  |  |
+
 ## Verification
 
 - Command:
 - Expected signal:
 - Observed signal:
+- Result: `pass` | `fail`
 
 ## Recovery
 
 - Trigger:
 - Action:
 - Owner:
+- Escalation path:
+
+## Metrics and sampling protocol
+
+| Metric | Sample object | Sample size | Cadence | Threshold | Reviewer |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+
+## Open issues
+
+- Issue:
+- Risk level:
+- Follow-up owner:
