@@ -1,21 +1,29 @@
 {
   "version": 1,
   "feat_id": "f-20260221-bagakit-paperwork-technical-writing-skill-v1",
-  "updated_at": "2026-02-21T12:17:22Z",
+  "updated_at": "2026-02-21T14:04:47Z",
   "tasks": [
     {
       "id": "T-001",
-      "title": "Implement first scoped change for this feat",
-      "status": "todo",
-      "summary": "Replace this placeholder with actual task detail.",
-      "gate_result": null,
-      "last_gate_at": null,
-      "last_gate_commands": [],
+      "title": "Build v1 bagakit-paperwork-technical-writing skill package",
+      "status": "done",
+      "summary": "Ship v1 skill with writing workflow contract, references, objective checker script, and packaging/validation docs.",
+      "gate_result": "pass",
+      "last_gate_at": "2026-02-21T14:03:35Z",
+      "last_gate_commands": [
+        {
+          "command": "bash bagakit-paperwork-technical-writing/scripts/validate-skill.sh",
+          "exit_code": 0,
+          "status": "pass"
+        }
+      ],
       "last_commit_hash": null,
-      "started_at": null,
-      "finished_at": null,
-      "updated_at": "2026-02-21T12:17:22Z",
-      "notes": []
+      "started_at": "2026-02-21T13:56:52Z",
+      "finished_at": "2026-02-21T14:04:47Z",
+      "updated_at": "2026-02-21T14:04:47Z",
+      "notes": [
+        "Derived from brainstorm archive 20260221T083101Z and approved expert forum gate."
+      ]
     }
   ]
 }
