@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "status": "complete",
+  "created_at": "2026-02-21T12:18:12Z",
+  "topic": "bagakit-paperwork technical writing skill",
+  "source_artifact": ".bagakit/brainstorm/runs/20260221T083101Z--bagakit-paperwork-technical-writing-skill",
+  "archived_artifact": ".bagakit/brainstorm/archive/20260221T083101Z--bagakit-paperwork-technical-writing-skill",
+  "artifact_moved": true,
+  "driver": {
+    "selected": "feat-harness",
+    "detected": [
+      "feat-harness"
+    ],
+    "feat_id": "f-20260221-bagakit-paperwork-technical-writing-skill-v1",
+    "change_id": null
+  },
+  "handoff": {
+    "action": {
+      "target": "bagakit-feat-task-harness:f-20260221-bagakit-paperwork-technical-writing-skill-v1",
+      "path": ".bagakit/ft-harness/feats/f-20260221-bagakit-paperwork-technical-writing-skill-v1/brainstorm-handoff-bagakit-paperwork-technical-writing-skill.md"
+    },
+    "memory": {
+      "target": "local-summary",
+      "path": ".bagakit/brainstorm/outcome/brainstorm-handoff-bagakit-paperwork-technical-writing-skill.md"
+    }
+  },
+  "checks": {
+    "required_stages_complete": true,
+    "input_and_qa_gate_clear": true,
+    "expert_forum_gate_clear": true,
+    "user_review_approved": true,
+    "action_destination_resolved": true,
+    "memory_destination_resolved": true,
+    "archive_written": true,
+    "artifact_moved_on_complete": true,
+    "experiment_count": 3,
+    "experiment_bonus_points": 3
+  },
+  "blocking_reasons": []
+}

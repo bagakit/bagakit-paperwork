@@ -1,0 +1,39 @@
+{
+  "status": "INVALID",
+  "generated_at": "2026-02-21T12:17:12Z",
+  "project_root": "<project-root>",
+  "manifest_path": "<skill-dir>/references/required-reading-manifest.json",
+  "manifest_sha256": "6708da04c6c2fc9a8164a235b75f4eac283e459a32ddabfc30f0ca0e23ebf544",
+  "entries": [
+    {
+      "id": "ft-harness-skill-contract",
+      "type": "file",
+      "location": "../SKILL.md",
+      "resolved_location": "<skill-dir>/SKILL.md",
+      "required": true,
+      "exists": true,
+      "sha256": "2e6bb7dfbdc27fb6922b6e25b163c85c87f43d68ecb7fba077230fbd9396eeba",
+      "error": ""
+    },
+    {
+      "id": "ft-harness-requirements",
+      "type": "file",
+      "location": "../docs/notes-requirements.md",
+      "resolved_location": "<skill-dir>/docs/notes-requirements.md",
+      "required": true,
+      "exists": false,
+      "sha256": "",
+      "error": "file not found"
+    },
+    {
+      "id": "ft-harness-guidebook",
+      "type": "file",
+      "location": "../docs/must-guidebook.md",
+      "resolved_location": "<skill-dir>/docs/must-guidebook.md",
+      "required": false,
+      "exists": false,
+      "sha256": "",
+      "error": "file not found"
+    }
+  ]
+}
