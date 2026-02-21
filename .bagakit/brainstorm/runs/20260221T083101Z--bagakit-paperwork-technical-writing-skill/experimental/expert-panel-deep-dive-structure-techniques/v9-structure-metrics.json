@@ -1,0 +1,73 @@
+{
+  "input_file": "/Users/bytedance/proj/priv/bagakit/bagakit-paperwork/.bagakit/brainstorm/runs/20260221T083101Z--bagakit-paperwork-technical-writing-skill/experimental/expert-b-lightning-blog-rewrite/versions/v9/article.md",
+  "h1_count": 1,
+  "h2_count": 5,
+  "h3_count": 12,
+  "bullet_count": 13,
+  "numbered_count": 3,
+  "signal_word_hits": 16,
+  "generic_heading_hits": [],
+  "section_stats": [
+    {
+      "title": "一、为什么聪明团队也会把 Brainstorm 做成返工机器",
+      "h3_count": 3,
+      "paragraph_count": 3,
+      "bullet_count": 3,
+      "numbered_count": 0,
+      "char_count": 360,
+      "has_example_signal": false
+    },
+    {
+      "title": "二、把讨论变成交接，需要四个接口和一条证据链",
+      "h3_count": 3,
+      "paragraph_count": 5,
+      "bullet_count": 7,
+      "numbered_count": 0,
+      "char_count": 631,
+      "has_example_signal": false
+    },
+    {
+      "title": "三、专家论坛的价值不在“讨论充分”，而在“可审计收敛”",
+      "h3_count": 3,
+      "paragraph_count": 5,
+      "bullet_count": 3,
+      "numbered_count": 0,
+      "char_count": 670,
+      "has_example_signal": false
+    },
+    {
+      "title": "四、同一份主稿如何同时服务“对外发布”和“对内落地”",
+      "h3_count": 3,
+      "paragraph_count": 5,
+      "bullet_count": 0,
+      "numbered_count": 3,
+      "char_count": 649,
+      "has_example_signal": true
+    },
+    {
+      "title": "结语",
+      "h3_count": 0,
+      "paragraph_count": 2,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 95,
+      "has_example_signal": false
+    }
+  ],
+  "diagnostic_flags": {
+    "list_heavy_sections": [],
+    "sparse_sections": [
+      "一、为什么聪明团队也会把 Brainstorm 做成返工机器",
+      "结语"
+    ],
+    "no_example_sections": [
+      "一、为什么聪明团队也会把 Brainstorm 做成返工机器",
+      "二、把讨论变成交接，需要四个接口和一条证据链",
+      "三、专家论坛的价值不在“讨论充分”，而在“可审计收敛”",
+      "结语"
+    ]
+  },
+  "issues": [
+    "Some sections have no explicit example markers."
+  ]
+}

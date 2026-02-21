@@ -1,0 +1,75 @@
+{
+  "input_file": "/Users/bytedance/proj/priv/bagakit/bagakit-paperwork/.bagakit/brainstorm/runs/20260221T083101Z--bagakit-paperwork-technical-writing-skill/experimental/expert-b-lightning-blog-rewrite/versions/v12/article.md",
+  "h1_count": 1,
+  "h2_count": 5,
+  "h3_count": 15,
+  "bullet_count": 0,
+  "numbered_count": 0,
+  "signal_word_hits": 12,
+  "generic_heading_hits": [
+    "3) 为什么这不是文风问题"
+  ],
+  "section_stats": [
+    {
+      "title": "一、讨论通常在交接处失真，而不是在讨论现场失败",
+      "h3_count": 3,
+      "paragraph_count": 4,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 439,
+      "has_example_signal": false
+    },
+    {
+      "title": "二、把讨论变计划，核心是接口分工和论证顺序",
+      "h3_count": 3,
+      "paragraph_count": 5,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 628,
+      "has_example_signal": false
+    },
+    {
+      "title": "三、专家论坛的目标是收敛争议，而不是延长会议",
+      "h3_count": 3,
+      "paragraph_count": 4,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 601,
+      "has_example_signal": false
+    },
+    {
+      "title": "四、同源双稿策略：发布主稿 + 执行附录",
+      "h3_count": 6,
+      "paragraph_count": 7,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 1278,
+      "has_example_signal": false
+    },
+    {
+      "title": "结语",
+      "h3_count": 0,
+      "paragraph_count": 1,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 71,
+      "has_example_signal": false
+    }
+  ],
+  "diagnostic_flags": {
+    "list_heavy_sections": [],
+    "sparse_sections": [
+      "结语"
+    ],
+    "no_example_sections": [
+      "一、讨论通常在交接处失真，而不是在讨论现场失败",
+      "二、把讨论变计划，核心是接口分工和论证顺序",
+      "三、专家论坛的目标是收敛争议，而不是延长会议",
+      "四、同源双稿策略：发布主稿 + 执行附录",
+      "结语"
+    ]
+  },
+  "issues": [
+    "Some sections have no explicit example markers."
+  ]
+}

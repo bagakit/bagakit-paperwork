@@ -1,0 +1,73 @@
+{
+  "input_file": "/Users/bytedance/proj/priv/bagakit/bagakit-paperwork/.bagakit/brainstorm/runs/20260221T083101Z--bagakit-paperwork-technical-writing-skill/experimental/expert-b-lightning-blog-rewrite/versions/v10/article.md",
+  "h1_count": 1,
+  "h2_count": 5,
+  "h3_count": 0,
+  "bullet_count": 0,
+  "numbered_count": 0,
+  "signal_word_hits": 14,
+  "generic_heading_hits": [],
+  "section_stats": [
+    {
+      "title": "一、问题通常不是出在讨论现场，而是出在交接接口",
+      "h3_count": 0,
+      "paragraph_count": 2,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 238,
+      "has_example_signal": false
+    },
+    {
+      "title": "二、把讨论写成可执行记录，需要明确分工而不是增加文档数量",
+      "h3_count": 0,
+      "paragraph_count": 4,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 553,
+      "has_example_signal": false
+    },
+    {
+      "title": "三、专家论坛的作用是收敛争议，不是增加会议时长",
+      "h3_count": 0,
+      "paragraph_count": 5,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 615,
+      "has_example_signal": false
+    },
+    {
+      "title": "四、同一份主稿可以同时服务发布与执行，只要投影方式清晰",
+      "h3_count": 0,
+      "paragraph_count": 5,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 569,
+      "has_example_signal": true
+    },
+    {
+      "title": "结语",
+      "h3_count": 0,
+      "paragraph_count": 1,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 76,
+      "has_example_signal": false
+    }
+  ],
+  "diagnostic_flags": {
+    "list_heavy_sections": [],
+    "sparse_sections": [
+      "一、问题通常不是出在讨论现场，而是出在交接接口",
+      "结语"
+    ],
+    "no_example_sections": [
+      "一、问题通常不是出在讨论现场，而是出在交接接口",
+      "二、把讨论写成可执行记录，需要明确分工而不是增加文档数量",
+      "三、专家论坛的作用是收敛争议，不是增加会议时长",
+      "结语"
+    ]
+  },
+  "issues": [
+    "Some sections have no explicit example markers."
+  ]
+}

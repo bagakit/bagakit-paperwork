@@ -1,0 +1,76 @@
+{
+  "input_file": "/Users/bytedance/proj/priv/bagakit/bagakit-paperwork/.bagakit/brainstorm/runs/20260221T083101Z--bagakit-paperwork-technical-writing-skill/experimental/expert-b-lightning-blog-rewrite/versions/v11/article.md",
+  "h1_count": 1,
+  "h2_count": 5,
+  "h3_count": 13,
+  "bullet_count": 0,
+  "numbered_count": 0,
+  "signal_word_hits": 9,
+  "generic_heading_hits": [
+    "3) 为什么这不是“写作风格”问题"
+  ],
+  "section_stats": [
+    {
+      "title": "一、真正的问题发生在交接，而不是讨论当下",
+      "h3_count": 3,
+      "paragraph_count": 3,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 329,
+      "has_example_signal": false
+    },
+    {
+      "title": "二、把讨论变成计划，需要稳定的文档接口",
+      "h3_count": 3,
+      "paragraph_count": 4,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 549,
+      "has_example_signal": false
+    },
+    {
+      "title": "三、专家论坛要输出“可执行结论”，必须保留字段级门禁",
+      "h3_count": 3,
+      "paragraph_count": 5,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 844,
+      "has_example_signal": false
+    },
+    {
+      "title": "四、对外发布稿和对内执行稿可以同源，但不能混写",
+      "h3_count": 4,
+      "paragraph_count": 5,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 579,
+      "has_example_signal": true
+    },
+    {
+      "title": "结语",
+      "h3_count": 0,
+      "paragraph_count": 1,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 69,
+      "has_example_signal": false
+    }
+  ],
+  "diagnostic_flags": {
+    "list_heavy_sections": [],
+    "sparse_sections": [
+      "一、真正的问题发生在交接，而不是讨论当下",
+      "结语"
+    ],
+    "no_example_sections": [
+      "一、真正的问题发生在交接，而不是讨论当下",
+      "二、把讨论变成计划，需要稳定的文档接口",
+      "三、专家论坛要输出“可执行结论”，必须保留字段级门禁",
+      "结语"
+    ]
+  },
+  "issues": [
+    "Some sections have no explicit example markers.",
+    "Signal-related language density is low."
+  ]
+}

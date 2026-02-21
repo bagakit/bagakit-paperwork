@@ -1,0 +1,75 @@
+{
+  "input_file": "/Users/bytedance/proj/priv/bagakit/bagakit-paperwork/.bagakit/brainstorm/runs/20260221T083101Z--bagakit-paperwork-technical-writing-skill/experimental/expert-b-lightning-blog-rewrite/versions/v7/article.md",
+  "h1_count": 1,
+  "h2_count": 5,
+  "h3_count": 12,
+  "bullet_count": 19,
+  "numbered_count": 4,
+  "signal_word_hits": 11,
+  "generic_heading_hits": [
+    "四、怎么落地，才不会又回到旧问题"
+  ],
+  "section_stats": [
+    {
+      "title": "一、讨论为什么总在交接时失效",
+      "h3_count": 3,
+      "paragraph_count": 3,
+      "bullet_count": 3,
+      "numbered_count": 0,
+      "char_count": 360,
+      "has_example_signal": false
+    },
+    {
+      "title": "二、内容应该怎么组织，读者才不会迷路",
+      "h3_count": 3,
+      "paragraph_count": 6,
+      "bullet_count": 8,
+      "numbered_count": 0,
+      "char_count": 472,
+      "has_example_signal": true
+    },
+    {
+      "title": "三、如何把“说得通”变成“做得到”",
+      "h3_count": 3,
+      "paragraph_count": 8,
+      "bullet_count": 6,
+      "numbered_count": 0,
+      "char_count": 470,
+      "has_example_signal": true
+    },
+    {
+      "title": "四、怎么落地，才不会又回到旧问题",
+      "h3_count": 3,
+      "paragraph_count": 5,
+      "bullet_count": 2,
+      "numbered_count": 4,
+      "char_count": 306,
+      "has_example_signal": false
+    },
+    {
+      "title": "结语",
+      "h3_count": 0,
+      "paragraph_count": 2,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 74,
+      "has_example_signal": false
+    }
+  ],
+  "diagnostic_flags": {
+    "list_heavy_sections": [],
+    "sparse_sections": [
+      "一、讨论为什么总在交接时失效",
+      "四、怎么落地，才不会又回到旧问题",
+      "结语"
+    ],
+    "no_example_sections": [
+      "一、讨论为什么总在交接时失效",
+      "四、怎么落地，才不会又回到旧问题",
+      "结语"
+    ]
+  },
+  "issues": [
+    "Some sections have no explicit example markers."
+  ]
+}

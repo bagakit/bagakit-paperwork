@@ -1,0 +1,87 @@
+{
+  "input_file": "/Users/bytedance/proj/priv/bagakit/bagakit-paperwork/.bagakit/brainstorm/runs/20260221T083101Z--bagakit-paperwork-technical-writing-skill/experimental/expert-b-lightning-blog-rewrite/versions/v8/article.md",
+  "h1_count": 1,
+  "h2_count": 6,
+  "h3_count": 14,
+  "bullet_count": 12,
+  "numbered_count": 3,
+  "signal_word_hits": 11,
+  "generic_heading_hits": [
+    "1) 三种论坛，对应三类问题"
+  ],
+  "section_stats": [
+    {
+      "title": "一、先定义读者和任务，不然“写得更好”只是空指令",
+      "h3_count": 3,
+      "paragraph_count": 3,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 324,
+      "has_example_signal": false
+    },
+    {
+      "title": "二、从“意见集合”到“决策接口”，中间差一条证据链",
+      "h3_count": 3,
+      "paragraph_count": 4,
+      "bullet_count": 6,
+      "numbered_count": 0,
+      "char_count": 514,
+      "has_example_signal": false
+    },
+    {
+      "title": "三、专家论坛的价值，不是“讨论充分”，而是“收敛可执行”",
+      "h3_count": 3,
+      "paragraph_count": 6,
+      "bullet_count": 6,
+      "numbered_count": 0,
+      "char_count": 548,
+      "has_example_signal": true
+    },
+    {
+      "title": "四、同一套内容如何同时适配“对外发布”和“对内落地”",
+      "h3_count": 2,
+      "paragraph_count": 4,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 338,
+      "has_example_signal": true
+    },
+    {
+      "title": "五、上线后如何判断这套系统真的在工作",
+      "h3_count": 3,
+      "paragraph_count": 2,
+      "bullet_count": 0,
+      "numbered_count": 3,
+      "char_count": 285,
+      "has_example_signal": false
+    },
+    {
+      "title": "结语",
+      "h3_count": 0,
+      "paragraph_count": 2,
+      "bullet_count": 0,
+      "numbered_count": 0,
+      "char_count": 104,
+      "has_example_signal": false
+    }
+  ],
+  "diagnostic_flags": {
+    "list_heavy_sections": [],
+    "sparse_sections": [
+      "一、先定义读者和任务，不然“写得更好”只是空指令",
+      "四、同一套内容如何同时适配“对外发布”和“对内落地”",
+      "五、上线后如何判断这套系统真的在工作",
+      "结语"
+    ],
+    "no_example_sections": [
+      "一、先定义读者和任务，不然“写得更好”只是空指令",
+      "二、从“意见集合”到“决策接口”，中间差一条证据链",
+      "五、上线后如何判断这套系统真的在工作",
+      "结语"
+    ]
+  },
+  "issues": [
+    "H2 count is outside 3-5 range.",
+    "Some sections have no explicit example markers."
+  ]
+}
