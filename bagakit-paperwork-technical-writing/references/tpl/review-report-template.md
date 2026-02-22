@@ -18,6 +18,8 @@
 - Full-sample required: `yes` | `no`
 - P0 proposition coverage target:
 - P0 anchor loop target:
+- Long sentence ratio target:
+- Memory-hook review target:
 - P0 short break target:
 - Budget result: `pass` | `fail`
 

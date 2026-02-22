@@ -16,7 +16,7 @@ Score each dimension independently.
 | Evidence package density | concrete examples + artifact anchors + operational signals | article has reviewable proof, not just framework outline | mostly framework narrative with weak concrete proof |
 | Publish suitability | language is objective, specific, and source-aware | publish-ready with minimal edit | heavy template tone or unsupported claims |
 | First-draft readiness | first draft already contains enough depth anchors | no major expansion needed before publish review | draft is still scaffold-level and needs bulk expansion |
-| Memorability | section propositions and anchor loop improve recall | reader can restate key claims quickly after one pass | claims are correct but hard to recall |
+| Memorability | section propositions, memory hooks, and ending closure improve recall | reader can restate key claims quickly after one pass | claims are correct but hard to recall |
 
 ## 1.1 Weighted Final Score (Recommended)
 
@@ -78,6 +78,7 @@ fix: <smallest effective correction>
 4. Decide `approve` or `revise` using policy.
 5. Record open risks and owner.
 6. If revised, define next deterministic action.
+7. For memory hooks, provide human judgment with concrete line references; do not rely on fixed phrase matching only.
 
 ## 6. Anti-Pattern Alerts
 

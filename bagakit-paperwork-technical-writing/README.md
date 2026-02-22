@@ -22,7 +22,8 @@ Recent guardrails:
 - compare evidence-pack density against baseline to catch framework-only rewrites
 - require agent-gate decision with severity findings
 - enforce first-draft profile density floors (words/cases/diagram/full-sample)
-- enforce P0 readability floors (H2 restatable propositions, anchor loop, short breaks)
+- enforce readability floors (H2 restatable propositions, anchor loop, long-sentence ratio, short breaks)
+- keep memory-hook quality in agent-gate review (heuristic hints only, no hard-coded slogan list)
 
 ## What ships in this package
 
@@ -38,6 +39,8 @@ Recent guardrails:
   scoring and finding format for agent-led review
 - `references/tpl/*.md`
   templates for article, execution appendix, and review report
+- `gate/anti-patterns/*`
+  complexity-guardrail validation protocol (`rules.toml` + `check-anti-patterns.py`)
 - `scripts/check-article.py`
   objective checker for structure, placeholder hygiene, publish leakage, and warning signals
 - `scripts/validate-skill.sh`

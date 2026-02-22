@@ -388,7 +388,7 @@ When audit shows strong executability but weak memorability, apply this P0 proto
 
 P0.1 Section restatable proposition:
 
-- each `##` section begins with one short proposition sentence (`<=20` units)
+- each `##` section begins with one short proposition sentence (`<=16` units)
 - the sentence should be independently restatable without reading the whole section
 
 P0.2 Anchor loop:
@@ -396,10 +396,21 @@ P0.2 Anchor loop:
 - place short anchor sentences in opening, middle, and ending sections
 - anchors should echo the same central judgment, not three unrelated slogans
 
-P0.3 Short break rhythm:
+P0.3 Long-sentence split:
 
-- add short break sentences (`10-16` units) at least once per 400-500 words
-- use these as cognitive reset points, not decorative fragments
+- split sentences over `40` units into `judgment sentence + evidence sentence`
+- keep long sentence ratio below `30%` for non-general profiles
+
+P0.4 Memory-hook cadence:
+
+- add one memory anchor roughly every `350-450` words
+- avoid fixed slogans; memory-hook quality is reviewed in agent gate, not hard-coded script pass/fail
+- valid forms include: short contrast line, compact recap line, or tri-question line
+
+P0.5 Ending closure:
+
+- close with either `goal/status/next step` three-question structure or one-line key-claim recap
+- ending should help readers retell the decision without re-reading full body
 
 Implementation note:
 

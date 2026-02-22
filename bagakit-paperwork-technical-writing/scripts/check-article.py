@@ -52,11 +52,15 @@ EXECUTION_FIELD_TOKENS = [
 ]
 SCOPE_CUT_MARKERS = ["scope cut", "范围收缩", "摘要版", "简版", "scope narrowed"]
 LONG_SAMPLE_MIN_LINES = 12
-H2_RESTATEMENT_MAX_UNITS = 20
+H2_RESTATEMENT_MAX_UNITS = 16
 SHORT_ANCHOR_MIN_UNITS = 8
 SHORT_ANCHOR_MAX_UNITS = 20
 SHORT_BREAK_MIN_UNITS = 10
 SHORT_BREAK_MAX_UNITS = 16
+LONG_SENTENCE_MAX_UNITS = 40
+MEMORY_HOOK_MIN_UNITS = 8
+MEMORY_HOOK_MAX_UNITS = 28
+TABLE_SEPARATOR_PATTERN = re.compile(r"^\s*\|?(?:\s*:?-+:?\s*\|)+\s*:?-+:?\s*\|?\s*$")
 PROFILE_RULES: dict[str, dict[str, int]] = {
     "general": {
         "min_words": 0,
@@ -74,6 +78,10 @@ PROFILE_RULES: dict[str, dict[str, int]] = {
         "require_h2_restatement": 1,
         "require_anchor_loop": 1,
         "short_break_words_per_anchor": 450,
+        "memory_hook_words_per_hint": 400,
+        "max_long_sentence_ratio": 30,
+        "warn_avg_sentence_units": 34,
+        "warn_ending_memory_closure": 1,
     },
     "protocol": {
         "min_words": 420,
@@ -84,6 +92,10 @@ PROFILE_RULES: dict[str, dict[str, int]] = {
         "require_h2_restatement": 1,
         "require_anchor_loop": 1,
         "short_break_words_per_anchor": 450,
+        "memory_hook_words_per_hint": 400,
+        "max_long_sentence_ratio": 30,
+        "warn_avg_sentence_units": 34,
+        "warn_ending_memory_closure": 1,
     },
     "infrastructure": {
         "min_words": 420,
@@ -94,6 +106,10 @@ PROFILE_RULES: dict[str, dict[str, int]] = {
         "require_h2_restatement": 1,
         "require_anchor_loop": 1,
         "short_break_words_per_anchor": 450,
+        "memory_hook_words_per_hint": 400,
+        "max_long_sentence_ratio": 30,
+        "warn_avg_sentence_units": 34,
+        "warn_ending_memory_closure": 1,
     },
 }
 
@@ -159,11 +175,10 @@ def count_mermaid_diagrams(text: str) -> int:
 def count_markdown_tables(lines: Iterable[str]) -> int:
     rows = list(lines)
     table_count = 0
-    separator_pattern = re.compile(r"^\s*\|?(?:\s*:?-+:?\s*\|)+\s*:?-+:?\s*\|?\s*$")
     for idx in range(1, len(rows)):
         if "|" not in rows[idx - 1]:
             continue
-        if separator_pattern.match(rows[idx]):
+        if TABLE_SEPARATOR_PATTERN.match(rows[idx]):
             table_count += 1
     return table_count
 
@@ -182,10 +197,20 @@ def normalize_line_for_sentence(line: str) -> str:
     return cleaned
 
 
-def split_sentences(text: str) -> list[str]:
+def split_sentences_with_punct(text: str) -> list[str]:
     normalized = text.replace("\r\n", "\n")
-    parts = re.split(r"[。！？!?；;]+|\n+", normalized)
+    normalized = re.sub(r"\n+", " ", normalized)
+    parts = re.findall(r"[^。！？!?；;]+[。！？!?；;]?", normalized)
     return [part.strip() for part in parts if part and part.strip()]
+
+
+def split_sentences(text: str) -> list[str]:
+    stripped: list[str] = []
+    for sentence in split_sentences_with_punct(text):
+        normalized = re.sub(r"[。！？!?；;]+$", "", sentence).strip()
+        if normalized:
+            stripped.append(normalized)
+    return stripped
 
 
 def sentence_units(sentence: str) -> int:
@@ -194,6 +219,69 @@ def sentence_units(sentence: str) -> int:
     if cjk_chars >= 4:
         return cjk_chars
     return len(re.findall(r"[A-Za-z0-9_]+", sentence))
+
+
+def build_body_text(non_code_lines: list[tuple[int, str]]) -> str:
+    body_lines: list[str] = []
+    for _, raw_line in non_code_lines:
+        if re.match(r"^#{1,6}\s+", raw_line):
+            continue
+        if TABLE_SEPARATOR_PATTERN.match(raw_line):
+            continue
+        normalized = normalize_line_for_sentence(raw_line)
+        if normalized:
+            body_lines.append(normalized)
+    return "\n".join(body_lines)
+
+
+def analyze_sentence_rhythm(body_text: str) -> tuple[int, float, int, float]:
+    sentences = split_sentences(body_text)
+    units: list[int] = []
+    for sentence in sentences:
+        if not sentence:
+            continue
+        unit = sentence_units(sentence)
+        if unit > 0:
+            units.append(unit)
+    total = len(units)
+    if total == 0:
+        return 0, 0.0, 0, 0.0
+    long_count = sum(1 for unit in units if unit > LONG_SENTENCE_MAX_UNITS)
+    average = round(sum(units) / total, 2)
+    ratio = round(long_count / total, 4)
+    return total, average, long_count, ratio
+
+
+def is_memory_hook_candidate(sentence_with_punct: str) -> bool:
+    plain = re.sub(r"[。！？!?；;]+$", "", sentence_with_punct).strip()
+    units = sentence_units(plain)
+    if units < MEMORY_HOOK_MIN_UNITS or units > MEMORY_HOOK_MAX_UNITS:
+        return False
+    # Keep this heuristic generic. Final memory quality judgment belongs to agent gate review.
+    if len(re.findall(r"[？?]", sentence_with_punct)) >= 1:
+        return True
+    if units <= 16 and not re.search(r"[，,:：;；]", sentence_with_punct):
+        return True
+    return False
+
+
+def count_memory_hooks(body_text: str) -> int:
+    return sum(1 for sentence in split_sentences_with_punct(body_text) if is_memory_hook_candidate(sentence))
+
+
+def analyze_ending_memory_closure(body_text: str) -> int:
+    sentences = split_sentences_with_punct(body_text)
+    if not sentences:
+        return 0
+    tail_size = max(3, math.ceil(len(sentences) * 0.2))
+    tail = sentences[-tail_size:]
+    has_tri_question = any(len(re.findall(r"[？?]", sentence)) >= 2 for sentence in tail)
+    has_goal_state_next = any(
+        all(token in sentence for token in ["目标", "状态", "下一步"])
+        for sentence in tail
+    )
+    has_recap = any(re.search(r"(一句话|核心|结论|复述|本质|总之)", sentence) for sentence in tail)
+    return int(has_tri_question or has_goal_state_next or has_recap)
 
 
 def analyze_h2_restatement(non_code_lines: list[tuple[int, str]]) -> tuple[int, int]:
@@ -306,6 +394,19 @@ def apply_profile_gates(
                 )
             )
 
+    max_long_sentence_ratio = int(rules.get("max_long_sentence_ratio", 0))
+    if max_long_sentence_ratio > 0:
+        ratio = float(metrics.get("long_sentence_ratio", 0.0))
+        max_ratio = max_long_sentence_ratio / 100
+        if ratio > max_ratio:
+            issues.append(
+                Issue(
+                    "error",
+                    "PROFILE_LONG_SENTENCE_RATIO",
+                    f"profile={profile}: long sentence ratio={ratio:.1%} above required <= {max_ratio:.0%}",
+                )
+            )
+
     words_per_anchor = int(rules.get("short_break_words_per_anchor", 0))
     if words_per_anchor > 0:
         words = int(metrics.get("word_count", 0))
@@ -318,6 +419,44 @@ def apply_profile_gates(
                     "error",
                     "PROFILE_SHORT_BREAK_FLOOR",
                     f"profile={profile}: short break sentences={short_breaks} below required {required_breaks}",
+                )
+            )
+
+    memory_hint_words = int(rules.get("memory_hook_words_per_hint", 0))
+    if memory_hint_words > 0:
+        words = int(metrics.get("word_count", 0))
+        required_hooks = 0 if words < 300 else math.ceil(words / memory_hint_words)
+        memory_hooks = int(metrics.get("memory_hook_candidate_count", 0))
+        metrics["recommended_memory_hook_count"] = required_hooks
+        if memory_hooks < required_hooks:
+            issues.append(
+                Issue(
+                    "warning",
+                    "MEMORY_HOOK_HINT_WEAK",
+                    "memory-hook candidate density is low; ask agent gate to add restatable anchor lines",
+                )
+            )
+
+    avg_sentence_warn = int(rules.get("warn_avg_sentence_units", 0))
+    if avg_sentence_warn > 0:
+        sentence_avg = float(metrics.get("sentence_units_avg", 0.0))
+        if sentence_avg > avg_sentence_warn:
+            issues.append(
+                Issue(
+                    "warning",
+                    "RHYTHM_AVG_SENTENCE_HIGH",
+                    f"profile={profile}: average sentence units={sentence_avg:.1f} above suggested <= {avg_sentence_warn}",
+                )
+            )
+
+    if int(rules.get("warn_ending_memory_closure", 0)) == 1:
+        ending_ok = int(metrics.get("ending_memory_closure_present", 0))
+        if ending_ok == 0:
+            issues.append(
+                Issue(
+                    "warning",
+                    "ENDING_MEMORY_CLOSURE_WEAK",
+                    "ending memory closure is weak; consider three-question close or one-line key-claim recap",
                 )
             )
 
@@ -422,6 +561,7 @@ def analyze(
     non_code_lines = extract_non_code_lines(lines)
     non_code_text = "\n".join(line for _, line in non_code_lines)
     non_code_only_lines = [line for _, line in non_code_lines]
+    body_text = build_body_text(non_code_lines)
     h1 = [ln for ln in non_code_only_lines if re.match(r"^#\s+", ln)]
     h2 = [ln for ln in non_code_only_lines if re.match(r"^##\s+", ln)]
     h3 = [ln for ln in non_code_only_lines if re.match(r"^###\s+", ln)]
@@ -443,12 +583,20 @@ def analyze(
     h2_required, h2_pass = analyze_h2_restatement(non_code_lines)
     metrics["h2_restatement_required"] = h2_required
     metrics["h2_restatement_pass"] = h2_pass
-    open_anchor, mid_anchor, end_anchor, anchor_score = analyze_anchor_loop(non_code_text)
+    open_anchor, mid_anchor, end_anchor, anchor_score = analyze_anchor_loop(body_text)
     metrics["anchor_opening_present"] = open_anchor
     metrics["anchor_middle_present"] = mid_anchor
     metrics["anchor_ending_present"] = end_anchor
     metrics["anchor_loop_score"] = anchor_score
-    metrics["short_break_sentence_count"] = count_short_break_sentences(non_code_text)
+    metrics["short_break_sentence_count"] = count_short_break_sentences(body_text)
+    total_sentences, avg_sentence_units, long_sentence_count, long_sentence_ratio = analyze_sentence_rhythm(body_text)
+    metrics["sentence_count"] = total_sentences
+    metrics["sentence_units_avg"] = avg_sentence_units
+    metrics["long_sentence_count"] = long_sentence_count
+    metrics["long_sentence_ratio"] = long_sentence_ratio
+    metrics["long_sentence_threshold"] = LONG_SENTENCE_MAX_UNITS
+    metrics["memory_hook_candidate_count"] = count_memory_hooks(body_text)
+    metrics["ending_memory_closure_present"] = analyze_ending_memory_closure(body_text)
 
     issues: list[Issue] = []
 
@@ -643,6 +791,17 @@ def build_report(input_path: Path, metrics: dict[str, float | int], issues: list
         f"- Anchor loop score: {metrics.get('anchor_loop_score', 0)}/3",
         f"- Short break sentences (10-16 units): {metrics.get('short_break_sentence_count', 0)}",
         f"- Required short break sentences: {metrics.get('required_short_break_sentence_count', 0)}",
+        f"- Sentence count: {metrics.get('sentence_count', 0)}",
+        f"- Average sentence units: {metrics.get('sentence_units_avg', 0)}",
+        (
+            "- Long sentence ratio (> "
+            + str(metrics.get("long_sentence_threshold", LONG_SENTENCE_MAX_UNITS))
+            + " units): "
+            + f"{float(metrics.get('long_sentence_ratio', 0.0)):.1%}"
+        ),
+        f"- Memory-hook candidate count: {metrics.get('memory_hook_candidate_count', 0)}",
+        f"- Recommended memory-hook count: {metrics.get('recommended_memory_hook_count', 0)}",
+        f"- Ending memory closure present: {metrics.get('ending_memory_closure_present', 0)}",
     ]
 
     if "baseline_word_count" in metrics:

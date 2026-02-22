@@ -79,7 +79,7 @@ Deliver technical writing that is readable for publication and actionable for ex
 2. Select article profile and content budget before drafting.
 - Choose profile: `brainstorm` / `protocol` / `infrastructure` / `general`.
 - Write a compact budget card in `review_report.md`: target words, case count, diagram count, full-sample requirement.
-- Add P0 readability budget: `H2 short proposition coverage`, `anchor loop (open/mid/end)`, `short break sentence count`.
+- Add readability budget: `H2 short proposition coverage`, `anchor loop (open/mid/end)`, `long sentence ratio`, `memory-hook review target`.
 - First-draft rule: do not output framework-only short draft as final article.
 
 3. Run version baseline gate before drafting.
@@ -98,10 +98,12 @@ Deliver technical writing that is readable for publication and actionable for ex
 - Paragraph-level: evidence/mechanism first, then local conclusion.
 - End each major section with explicit action or validation signal.
 - Keep publish narrative continuous; avoid checklist-like process fields in body text.
-- P0 memory/readability rules:
-  - each `##` section starts with one short restatable proposition (<=20 units).
-  - include short anchor lines in opening, middle, and ending sections.
-  - include short break sentences (10-16 units) at least once per 400-500 words.
+- Memory/readability rules:
+  - each `##` section starts with one short restatable proposition (<=16 units).
+  - split sentences longer than 40 units into `judgment sentence + evidence sentence`.
+  - keep long sentence ratio under 30% for non-general profiles.
+  - add one memory anchor every 350-450 words; quality is reviewed by agent gate (not hard-coded script pass/fail).
+  - ending uses either `three-question close (goal/status/next step)` or `one-line key-claim recap`.
 
 6. Split publication and execution content.
 - Main article explains why the approach is correct.
@@ -143,7 +145,7 @@ Deliver technical writing that is readable for publication and actionable for ex
   - No unresolved placeholders.
   - No internal directive leakage in publish article.
   - Profile density floor passed (`--profile`).
-  - P0 readability floor passed for non-general profiles (`restatable proposition`, `anchor loop`, `short break density`).
+  - Readability floor passed for non-general profiles (`restatable proposition`, `anchor loop`, `long sentence ratio`, `short break density`).
   - No high-compression rewrite regression vs baseline evidence classes.
 - Warning gates:
   - Overloaded bullet sections (continuous list items > 5).
@@ -152,8 +154,28 @@ Deliver technical writing that is readable for publication and actionable for ex
   - Evidence pack is thinner than baseline.
   - AI-tone risk phrases requiring human rewrite judgment.
   - Suspicious content shrink relative to baseline draft.
+  - Memory-anchor quality and ending recall closure are agent-reviewed warnings.
 
 See details in `references/quality-gates.md`.
+
+## Complexity Guardrails
+
+- `preset-heavy` / `预设偏多`:
+  - keep one default drafting route; put scenario variants into optional profile notes.
+  - check: list defaults in one place and keep each default justified.
+- `implementation-heavy` / `实现偏重`:
+  - do not solve narrative quality by adding scripts first.
+  - check: keep memory/readability quality primarily in rubric review before script hard gates.
+- `too-many-defaults` / `默认行为太多`:
+  - avoid hidden defaults outside profile budgets and hard-gate table.
+  - check: if a new default is added, document trigger and tradeoff explicitly.
+- `over-hard-validation` / `校验过硬`:
+  - avoid over-hard validation and strict gate expansion on qualitative writing dimensions.
+  - scripts should gate objective invariants; qualitative memory-hook quality stays warning + agent review.
+  - check: verify memory-hook decisions are review/audit records, not fixed phrase pass/fail.
+- `scattered-constraints` / `约束分散`:
+  - keep single-source constraint statements in `references/quality-gates.md` and reference from other docs.
+  - check: avoid duplicating must-rules without a single-source anchor.
 
 ## Commands
 
