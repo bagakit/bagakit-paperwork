@@ -15,6 +15,7 @@ Hard gate failure means the draft cannot be marked complete.
 | H2 range | H2 count in `[3, 5]` by default | keeps scanability and scope control |
 | placeholder hygiene | no `TODO`, `TBD`, `{{...}}`, `待补充` | avoids implicit unfinished state |
 | publish metadata leakage | no `[[BAGAKIT]]` or `- PaperworkWriting:` line in article | prevents internal directive pollution in publish copy |
+| first-draft density floor | when `--profile` is set (non-general), satisfy profile floors for words/cases/diagrams/full-sample anchors | ensures first draft is publish-grade, not a short scaffold |
 | rewrite regression guard | if baseline exists, high-compression rewrite cannot drop multiple evidence classes (`full sample`, `hard evidence`, `anti-pattern`, `rollout/checklist`); and high-content baseline (`>=500` words) cannot be compressed `>45%` without explicit scope-cut note | blocks "clean but hollow" rewrites |
 | checker status | `scripts/check-article.py --strict` exits `0` | ensures objective baseline is met |
 
@@ -68,8 +69,8 @@ Escalation output should define:
 ## 6. Operational Command
 
 ```bash
-python3 scripts/check-article.py --input article.md --strict --report review_report.md
-python3 scripts/check-article.py --input article.md --baseline previous.md --report review_report.md
+python3 scripts/check-article.py --input article.md --strict --profile <profile> --report review_report.md
+python3 scripts/check-article.py --input article.md --strict --profile <profile> --baseline previous.md --report review_report.md
 ```
 
 ## 7. Minimal Reviewer Checklist

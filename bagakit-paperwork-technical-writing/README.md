@@ -21,6 +21,7 @@ Recent guardrails:
 - support baseline comparison for suspicious one-pass compression
 - compare evidence-pack density against baseline to catch framework-only rewrites
 - require agent-gate decision with severity findings
+- enforce first-draft profile density floors (words/cases/diagram/full-sample)
 
 ## What ships in this package
 
@@ -87,10 +88,13 @@ python3 scripts/check-article.py --input references/tpl/article-template.md --st
 python3 scripts/check-article.py \
   --input article.md \
   --strict \
+  --profile protocol \
   --report review_report.md
 
 python3 scripts/check-article.py \
   --input article.md \
+  --strict \
+  --profile infrastructure \
   --baseline previous.md \
   --report review_report.md
 ```

@@ -10,6 +10,9 @@ Describe one concrete recurring failure and who is blocked by it.
 ### What breaks if unchanged
 Describe operational consequence and one explicit boundary where this does not apply.
 
+### Field case (recommended)
+Add one concrete scenario with role, symptom, and consequence timeline.
+
 ## 2. Core Mechanism
 
 ### How the mechanism works
@@ -17,6 +20,9 @@ Explain the approach in 2-4 paragraphs. Keep one local claim per paragraph.
 
 ### Why this trade-off is acceptable now
 Compare at least two alternatives and state why this choice is practical now.
+
+### Diagram for decision flow (recommended)
+Use one Mermaid diagram when sequence/loop/rollback matters for review speed.
 
 ## 3. Evidence and Validation
 

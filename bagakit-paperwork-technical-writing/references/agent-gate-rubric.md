@@ -15,6 +15,7 @@ Score each dimension independently.
 | Information architecture | heading/section hierarchy supports fast scan | decision path reconstructable from headings | structure requires full linear reading |
 | Evidence package density | concrete examples + artifact anchors + operational signals | article has reviewable proof, not just framework outline | mostly framework narrative with weak concrete proof |
 | Publish suitability | language is objective, specific, and source-aware | publish-ready with minimal edit | heavy template tone or unsupported claims |
+| First-draft readiness | first draft already contains enough depth anchors | no major expansion needed before publish review | draft is still scaffold-level and needs bulk expansion |
 
 ## 1.1 Weighted Final Score (Recommended)
 

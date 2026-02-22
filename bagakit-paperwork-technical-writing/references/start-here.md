@@ -18,6 +18,31 @@ Important:
 - Keep this as planning artifact.
 - Do not copy planning headers (for example `Reader contract`) into publish article.
 
+## Step 0.5: Lock first-draft profile and budget
+
+Before drafting first paragraph, decide one profile:
+
+- `brainstorm`: decision forums, discussion-to-handoff topics
+- `protocol`: spec/contract/message-format topics
+- `infrastructure`: system/evolution/governance topics
+- `general`: fallback when none of the above applies
+
+Then write a first-draft budget card in `review_report.md`:
+
+- target words
+- case/example count
+- diagram count
+- full-sample requirement (`yes/no`)
+
+Suggested floor:
+
+| Profile | Words | Cases | Mermaid | Full sample |
+|---|---:|---:|---:|---:|
+| brainstorm | >=320 | >=2 | >=1 | optional |
+| protocol | >=420 | >=2 | optional | required |
+| infrastructure | >=420 | >=2 | optional | required |
+| general | >=280 | >=1 | optional | optional |
+
 ## Step 1: Run version baseline gate
 
 If a previous version exists, read:
@@ -106,13 +131,13 @@ Files:
 Command:
 
 ```bash
-python3 scripts/check-article.py --input article.md --strict --report review_report.md
+python3 scripts/check-article.py --input article.md --strict --profile <profile> --report review_report.md
 ```
 
 Optional baseline comparison:
 
 ```bash
-python3 scripts/check-article.py --input article.md --baseline previous.md --report review_report.md
+python3 scripts/check-article.py --input article.md --strict --profile <profile> --baseline previous.md --report review_report.md
 ```
 
 Rewrite rule:
@@ -120,6 +145,7 @@ Rewrite rule:
 - if this is a rewrite, baseline comparison is mandatory
 - if checker reports baseline regression class drops, revise before release
 - if compression is over 45% on a high-content baseline, add explicit scope-cut note or revise
+- if profile density floors fail, revise before release
 
 Rule:
 

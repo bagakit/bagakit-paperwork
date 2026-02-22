@@ -362,6 +362,26 @@ Rewrite tactics:
 - convert some list clusters back into explanatory paragraphs
 - replace vague labels with scenario-grounded statements
 
+## 19.1 First-Draft Expansion Protocol
+
+When quality target is first-draft publishability, expand by evidence depth, not filler.
+
+Minimum expansion moves:
+
+- add one concrete failure case and one recovery case
+- add one diagram that makes review order obvious
+- add one full sample block (12+ lines or 3+ command chain)
+- add one rollout checklist (5+ actionable checks)
+
+Section-level expansion pattern:
+
+1. What fails now (concrete symptom).
+2. Why this mechanism fixes it (causal explanation).
+3. What evidence proves it (artifact/signal/threshold).
+4. How to adopt safely (rollout + fallback).
+
+If draft grows in words but does not add these anchors, it is length inflation, not quality improvement.
+
 ## 20. Review Loop and Regression Control
 
 Before each new version:

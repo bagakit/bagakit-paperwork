@@ -5,9 +5,18 @@
 - Source file:
 - Target file:
 - Baseline file (optional):
-- Review mode: `one-shot` | `iterative`
+- Review mode: `first-draft` | `iterative`
 - Reviewer:
 - Review date:
+
+## First-Draft Budget Card
+
+- Profile: `brainstorm` | `protocol` | `infrastructure` | `general`
+- Target words:
+- Target case/example count:
+- Target diagram count:
+- Full-sample required: `yes` | `no`
+- Budget result: `pass` | `fail`
 
 ## Hard Gate Result
 
@@ -63,6 +72,7 @@
 | Trigger precision |  |  |
 | Information architecture |  |  |
 | Publish suitability |  |  |
+| First-draft readiness |  |  |
 
 ## Final Decision
 
