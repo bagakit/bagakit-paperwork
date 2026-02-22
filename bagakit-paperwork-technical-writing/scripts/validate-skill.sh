@@ -9,6 +9,7 @@ required=(
   "${ROOT_DIR}/README.md"
   "${ROOT_DIR}/gate/anti-patterns/rules.toml"
   "${ROOT_DIR}/gate/anti-patterns/check-anti-patterns.py"
+  "${ROOT_DIR}/gate/anti-patterns/ai-tone-terms.txt"
   "${ROOT_DIR}/references/quality-gates.md"
   "${ROOT_DIR}/references/writing-techniques.md"
   "${ROOT_DIR}/references/markdown-formatting.md"

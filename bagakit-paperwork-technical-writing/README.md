@@ -22,8 +22,9 @@ Recent guardrails:
 - compare evidence-pack density against baseline to catch framework-only rewrites
 - require agent-gate decision with severity findings
 - enforce first-draft profile density floors (words/cases/diagram/full-sample)
-- enforce readability floors (H2 restatable propositions, anchor loop, long-sentence ratio, short breaks)
-- keep memory-hook quality in agent-gate review (heuristic hints only, no hard-coded slogan list)
+- enforce readability floors (H2 restatable propositions, anchor loop, long-sentence ratio<25%, short breaks)
+- keep memory-hook quality in agent-gate review (heuristic hints only)
+- keep AI-tone lexicon checks as warning-only lint via `gate/anti-patterns/ai-tone-terms.txt`
 
 ## What ships in this package
 
@@ -41,6 +42,8 @@ Recent guardrails:
   templates for article, execution appendix, and review report
 - `gate/anti-patterns/*`
   complexity-guardrail validation protocol (`rules.toml` + `check-anti-patterns.py`)
+- `gate/anti-patterns/ai-tone-terms.txt`
+  warning-level lexicon for AI-tone lint hints in article checking
 - `scripts/check-article.py`
   objective checker for structure, placeholder hygiene, publish leakage, and warning signals
 - `scripts/validate-skill.sh`

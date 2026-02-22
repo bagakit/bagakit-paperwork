@@ -80,6 +80,7 @@ Deliver technical writing that is readable for publication and actionable for ex
 - Choose profile: `brainstorm` / `protocol` / `infrastructure` / `general`.
 - Write a compact budget card in `review_report.md`: target words, case count, diagram count, full-sample requirement.
 - Add readability budget: `H2 short proposition coverage`, `anchor loop (open/mid/end)`, `long sentence ratio`, `memory-hook review target`.
+- For `brainstorm` profile, also budget sampling protocol metadata (`sampling object`, `sample size`, `window`, `review role`).
 - First-draft rule: do not output framework-only short draft as final article.
 
 3. Run version baseline gate before drafting.
@@ -101,8 +102,10 @@ Deliver technical writing that is readable for publication and actionable for ex
 - Memory/readability rules:
   - each `##` section starts with one short restatable proposition (<=16 units).
   - split sentences longer than 40 units into `judgment sentence + evidence sentence`.
-  - keep long sentence ratio under 30% for non-general profiles.
+  - keep long sentence ratio under 25% for non-general profiles.
   - add one memory anchor every 350-450 words; quality is reviewed by agent gate (not hard-coded script pass/fail).
+  - avoid 3+ consecutive mechanical short sequence sentences (`先X。再Y。...`) and clean fragment-like residual short lines.
+  - AI-tone lexicon checks are warning-level lint only (see `gate/anti-patterns/ai-tone-terms.txt`); final rewrite judgment is human/agent review.
   - ending uses either `three-question close (goal/status/next step)` or `one-line key-claim recap`.
 
 6. Split publication and execution content.
@@ -145,16 +148,17 @@ Deliver technical writing that is readable for publication and actionable for ex
   - No unresolved placeholders.
   - No internal directive leakage in publish article.
   - Profile density floor passed (`--profile`).
-  - Readability floor passed for non-general profiles (`restatable proposition`, `anchor loop`, `long sentence ratio`, `short break density`).
+  - Readability floor passed for non-general profiles (`restatable proposition`, `anchor loop`, `long sentence ratio<25%`, `short break density`).
   - No high-compression rewrite regression vs baseline evidence classes.
 - Warning gates:
   - Overloaded bullet sections (continuous list items > 5).
   - Generic headings with low semantic specificity.
   - No concrete example markers in body.
   - Evidence pack is thinner than baseline.
-  - AI-tone risk phrases requiring human rewrite judgment.
+  - AI-tone lexicon hits requiring human rewrite judgment.
   - Suspicious content shrink relative to baseline draft.
   - Memory-anchor quality and ending recall closure are agent-reviewed warnings.
+  - `brainstorm` sampling metadata completeness is warning-reviewed (object/size/window/review role).
 
 See details in `references/quality-gates.md`.
 
@@ -195,6 +199,7 @@ bash scripts/validate-skill.sh
 - `references/tpl/article-template.md`
 - `references/tpl/execution-appendix-template.md`
 - `references/tpl/review-report-template.md`
+- `gate/anti-patterns/ai-tone-terms.txt`
 
 ## `[[BAGAKIT]]` Footer (Non-Article Only)
 

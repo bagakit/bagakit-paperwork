@@ -47,6 +47,13 @@ Keep one longer concrete sample in body text (for example a 12+ line message/tem
 ### Validation signal
 State how the result is measured and what threshold counts as pass.
 
+### Sampling protocol metadata (required for brainstorm profile)
+State:
+- sampling object
+- sample size / sampling count
+- sampling window
+- review role(s)
+
 ### Memory anchor line (recommended)
 Add one recall-friendly anchor line around every 350-450 words (contrast line, recap line, or tri-question line).
 

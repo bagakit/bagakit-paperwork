@@ -21,6 +21,7 @@
 - Long sentence ratio target:
 - Memory-hook review target:
 - P0 short break target:
+- Brainstorm sampling metadata target:
 - Budget result: `pass` | `fail`
 
 ## Hard Gate Result

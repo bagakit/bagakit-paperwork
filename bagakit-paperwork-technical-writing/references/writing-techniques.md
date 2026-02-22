@@ -399,7 +399,7 @@ P0.2 Anchor loop:
 P0.3 Long-sentence split:
 
 - split sentences over `40` units into `judgment sentence + evidence sentence`
-- keep long sentence ratio below `30%` for non-general profiles
+- keep long sentence ratio below `25%` for non-general profiles
 
 P0.4 Memory-hook cadence:
 
@@ -411,6 +411,17 @@ P0.5 Ending closure:
 
 - close with either `goal/status/next step` three-question structure or one-line key-claim recap
 - ending should help readers retell the decision without re-reading full body
+
+P0.6 Brainstorm sampling metadata:
+
+- for brainstorm-profile drafts, include `sampling object`, `sample size`, `window`, and `review role`
+- this is required for operational trust; otherwise readers cannot reproduce forum-level judgments
+
+P0.7 Anti-mechanical rhythm:
+
+- avoid 3+ consecutive short sequence-style lines (for example `先X。再Y。最后Z。`)
+- clean fragment-like residual lines and merge them into causal sentences
+- keep AI-tone lexicon checks as warning-only lint; final rewrite decision belongs to agent review
 
 Implementation note:
 
