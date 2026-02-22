@@ -19,14 +19,14 @@ package-skill:
 	  mkdir -p "$$out_dir"; \
 	  artifact="$$out_dir/$(SKILL_NAME).skill"; \
 	  rm -f "$$artifact"; \
-	  zip -r "$$artifact" SKILL.md SKILL_PAYLOAD.json README.md references scripts agents \
+	  zip -r "$$artifact" SKILL.md SKILL_PAYLOAD.json README.md references gate scripts agents \
 	    -x "*/__pycache__/*" "*.pyc" "*.pyo" >/dev/null; \
 	  echo "packaged: $$artifact"
 
 install-skill:
 	rm -rf "$(SKILL_DIR)"
 	mkdir -p "$(SKILL_DIR)"
-	cp -R SKILL.md SKILL_PAYLOAD.json README.md references scripts agents "$(SKILL_DIR)/"
+	cp -R SKILL.md SKILL_PAYLOAD.json README.md references gate scripts agents "$(SKILL_DIR)/"
 	find "$(SKILL_DIR)/scripts" -type f -name "*.sh" -exec chmod +x {} +
 	find "$(SKILL_DIR)/scripts" -type f -name "*.py" -exec chmod +x {} +
 	@echo "installed: $(SKILL_DIR)"
