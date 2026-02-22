@@ -382,6 +382,30 @@ Section-level expansion pattern:
 
 If draft grows in words but does not add these anchors, it is length inflation, not quality improvement.
 
+## 19.2 P0 Memory and Restatement Protocol
+
+When audit shows strong executability but weak memorability, apply this P0 protocol first.
+
+P0.1 Section restatable proposition:
+
+- each `##` section begins with one short proposition sentence (`<=20` units)
+- the sentence should be independently restatable without reading the whole section
+
+P0.2 Anchor loop:
+
+- place short anchor sentences in opening, middle, and ending sections
+- anchors should echo the same central judgment, not three unrelated slogans
+
+P0.3 Short break rhythm:
+
+- add short break sentences (`10-16` units) at least once per 400-500 words
+- use these as cognitive reset points, not decorative fragments
+
+Implementation note:
+
+- do not trade away evidence density, checklist completeness, or command-chain traceability
+- P0 is additive to executability; it is not a rollback to lighter content
+
 ## 20. Review Loop and Regression Control
 
 Before each new version:

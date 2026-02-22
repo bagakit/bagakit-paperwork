@@ -16,6 +16,7 @@ Hard gate failure means the draft cannot be marked complete.
 | placeholder hygiene | no `TODO`, `TBD`, `{{...}}`, `待补充` | avoids implicit unfinished state |
 | publish metadata leakage | no `[[BAGAKIT]]` or `- PaperworkWriting:` line in article | prevents internal directive pollution in publish copy |
 | first-draft density floor | when `--profile` is set (non-general), satisfy profile floors for words/cases/diagrams/full-sample anchors | ensures first draft is publish-grade, not a short scaffold |
+| P0 readability floor | for non-general profiles, satisfy all: H2 short restatement coverage, opening/middle/ending anchor loop, short break sentence density | prevents drafts that are solid but hard to restate and remember |
 | rewrite regression guard | if baseline exists, high-compression rewrite cannot drop multiple evidence classes (`full sample`, `hard evidence`, `anti-pattern`, `rollout/checklist`); and high-content baseline (`>=500` words) cannot be compressed `>45%` without explicit scope-cut note | blocks "clean but hollow" rewrites |
 | checker status | `scripts/check-article.py --strict` exits `0` | ensures objective baseline is met |
 
@@ -35,6 +36,7 @@ Warning gates do not auto-block release, but cannot be silently ignored.
 | evidence-pack drop vs baseline | baseline has richer evidence anchors than current rewrite | restore key evidence blocks or document intentional scope cut |
 | sample/checklist class drop | baseline has long sample block or rollout checklist but rewrite removes it | restore class-level evidence density or document explicit scope cut |
 | hard-evidence chain drop | baseline has command/path/hash/threshold linkage but rewrite drops that chain | recover traceability chain in body text |
+| memory-anchor weak coverage | short proposition or anchor loop appears sporadically in manual review | add P0 anchors at section starts and section boundaries |
 
 ## 3. Review Recording Contract
 

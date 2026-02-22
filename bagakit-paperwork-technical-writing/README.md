@@ -22,6 +22,7 @@ Recent guardrails:
 - compare evidence-pack density against baseline to catch framework-only rewrites
 - require agent-gate decision with severity findings
 - enforce first-draft profile density floors (words/cases/diagram/full-sample)
+- enforce P0 readability floors (H2 restatable propositions, anchor loop, short breaks)
 
 ## What ships in this package
 

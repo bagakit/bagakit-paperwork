@@ -16,6 +16,9 @@
 - Target case/example count:
 - Target diagram count:
 - Full-sample required: `yes` | `no`
+- P0 proposition coverage target:
+- P0 anchor loop target:
+- P0 short break target:
 - Budget result: `pass` | `fail`
 
 ## Hard Gate Result

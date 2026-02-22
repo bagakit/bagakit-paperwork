@@ -4,6 +4,8 @@
 
 ## 1. Why This Matters Now
 
+短命题（<=20 units，可复述）：
+
 ### Current failure pattern
 Describe one concrete recurring failure and who is blocked by it.
 
@@ -15,6 +17,8 @@ Add one concrete scenario with role, symptom, and consequence timeline.
 
 ## 2. Core Mechanism
 
+短命题（<=20 units，可复述）：
+
 ### How the mechanism works
 Explain the approach in 2-4 paragraphs. Keep one local claim per paragraph.
 
@@ -25,6 +29,8 @@ Compare at least two alternatives and state why this choice is practical now.
 Use one Mermaid diagram when sequence/loop/rollback matters for review speed.
 
 ## 3. Evidence and Validation
+
+短命题（<=20 units，可复述）：
 
 ### Evidence path
 Map claim to evidence (`experiment`, `docs`, `observed signal`).
@@ -43,6 +49,8 @@ State how the result is measured and what threshold counts as pass.
 
 ## 4. Adoption Path
 
+短命题（<=20 units，可复述）：
+
 ### Minimal rollout steps
 Describe the smallest viable rollout sequence and owner responsibilities.
 
@@ -53,6 +61,8 @@ List 5+ checks that define "ready to publish/adopt" and include at least one rol
 Describe rollback trigger and recovery action.
 
 ## 5. Final Decision and Next Action
+
+短命题（<=20 units，可复述）：
 
 ### Before/after contrast (required)
 Document one concrete `Before` and `After` contrast and explain decision impact.

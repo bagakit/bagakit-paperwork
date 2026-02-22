@@ -79,6 +79,7 @@ Deliver technical writing that is readable for publication and actionable for ex
 2. Select article profile and content budget before drafting.
 - Choose profile: `brainstorm` / `protocol` / `infrastructure` / `general`.
 - Write a compact budget card in `review_report.md`: target words, case count, diagram count, full-sample requirement.
+- Add P0 readability budget: `H2 short proposition coverage`, `anchor loop (open/mid/end)`, `short break sentence count`.
 - First-draft rule: do not output framework-only short draft as final article.
 
 3. Run version baseline gate before drafting.
@@ -97,6 +98,10 @@ Deliver technical writing that is readable for publication and actionable for ex
 - Paragraph-level: evidence/mechanism first, then local conclusion.
 - End each major section with explicit action or validation signal.
 - Keep publish narrative continuous; avoid checklist-like process fields in body text.
+- P0 memory/readability rules:
+  - each `##` section starts with one short restatable proposition (<=20 units).
+  - include short anchor lines in opening, middle, and ending sections.
+  - include short break sentences (10-16 units) at least once per 400-500 words.
 
 6. Split publication and execution content.
 - Main article explains why the approach is correct.
@@ -138,6 +143,7 @@ Deliver technical writing that is readable for publication and actionable for ex
   - No unresolved placeholders.
   - No internal directive leakage in publish article.
   - Profile density floor passed (`--profile`).
+  - P0 readability floor passed for non-general profiles (`restatable proposition`, `anchor loop`, `short break density`).
   - No high-compression rewrite regression vs baseline evidence classes.
 - Warning gates:
   - Overloaded bullet sections (continuous list items > 5).

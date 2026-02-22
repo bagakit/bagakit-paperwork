@@ -33,6 +33,9 @@ Then write a first-draft budget card in `review_report.md`:
 - case/example count
 - diagram count
 - full-sample requirement (`yes/no`)
+- H2 short proposition coverage target (default: `100%`)
+- anchor loop target (opening + middle + ending all present)
+- short break sentence target (`10-16` units, default: `ceil(words/450)` when words >= 350)
 
 Suggested floor:
 
@@ -42,6 +45,12 @@ Suggested floor:
 | protocol | >=420 | >=2 | optional | required |
 | infrastructure | >=420 | >=2 | optional | required |
 | general | >=280 | >=1 | optional | optional |
+
+P0 readability floor for non-general profiles:
+
+- each `##` section has a short restatable proposition as first sentence (`<=20` units)
+- short anchors appear in opening, middle, and ending sections
+- short break sentences (`10-16` units) appear at least once per 400-500 words
 
 ## Step 1: Run version baseline gate
 

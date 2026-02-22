@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import sys
 from dataclasses import dataclass
@@ -51,6 +52,11 @@ EXECUTION_FIELD_TOKENS = [
 ]
 SCOPE_CUT_MARKERS = ["scope cut", "范围收缩", "摘要版", "简版", "scope narrowed"]
 LONG_SAMPLE_MIN_LINES = 12
+H2_RESTATEMENT_MAX_UNITS = 20
+SHORT_ANCHOR_MIN_UNITS = 8
+SHORT_ANCHOR_MAX_UNITS = 20
+SHORT_BREAK_MIN_UNITS = 10
+SHORT_BREAK_MAX_UNITS = 16
 PROFILE_RULES: dict[str, dict[str, int]] = {
     "general": {
         "min_words": 0,
@@ -65,6 +71,9 @@ PROFILE_RULES: dict[str, dict[str, int]] = {
         "min_mermaid_diagrams": 1,
         "min_table_count": 0,
         "min_full_sample_anchor": 0,
+        "require_h2_restatement": 1,
+        "require_anchor_loop": 1,
+        "short_break_words_per_anchor": 450,
     },
     "protocol": {
         "min_words": 420,
@@ -72,6 +81,9 @@ PROFILE_RULES: dict[str, dict[str, int]] = {
         "min_mermaid_diagrams": 0,
         "min_table_count": 0,
         "min_full_sample_anchor": 1,
+        "require_h2_restatement": 1,
+        "require_anchor_loop": 1,
+        "short_break_words_per_anchor": 450,
     },
     "infrastructure": {
         "min_words": 420,
@@ -79,6 +91,9 @@ PROFILE_RULES: dict[str, dict[str, int]] = {
         "min_mermaid_diagrams": 0,
         "min_table_count": 0,
         "min_full_sample_anchor": 1,
+        "require_h2_restatement": 1,
+        "require_anchor_loop": 1,
+        "short_break_words_per_anchor": 450,
     },
 }
 
@@ -158,6 +173,85 @@ def count_case_markers(text: str) -> int:
     return sum(lower.count(marker.lower()) for marker in CASE_MARKERS)
 
 
+def normalize_line_for_sentence(line: str) -> str:
+    cleaned = line.strip()
+    cleaned = re.sub(r"^\s*[-*]\s+", "", cleaned)
+    cleaned = re.sub(r"^\s*\d+\.\s+", "", cleaned)
+    cleaned = re.sub(r"^\s*>\s*", "", cleaned)
+    cleaned = re.sub(r"^\s*\|\s*", "", cleaned)
+    return cleaned
+
+
+def split_sentences(text: str) -> list[str]:
+    normalized = text.replace("\r\n", "\n")
+    parts = re.split(r"[。！？!?；;]+|\n+", normalized)
+    return [part.strip() for part in parts if part and part.strip()]
+
+
+def sentence_units(sentence: str) -> int:
+    compact = re.sub(r"\s+", "", sentence)
+    cjk_chars = len(re.findall(r"[\u4e00-\u9fff]", compact))
+    if cjk_chars >= 4:
+        return cjk_chars
+    return len(re.findall(r"[A-Za-z0-9_]+", sentence))
+
+
+def analyze_h2_restatement(non_code_lines: list[tuple[int, str]]) -> tuple[int, int]:
+    sections: list[list[str]] = []
+    current: list[str] | None = None
+    for _, raw_line in non_code_lines:
+        if re.match(r"^##\s+", raw_line):
+            if current is not None:
+                sections.append(current)
+            current = []
+            continue
+        if current is not None:
+            current.append(raw_line)
+    if current is not None:
+        sections.append(current)
+
+    required = len(sections)
+    passed = 0
+    for lines in sections:
+        section_lines: list[str] = []
+        for line in lines:
+            if re.match(r"^##\s+", line):
+                continue
+            section_lines.append(normalize_line_for_sentence(line))
+        first_sentence = next((s for s in split_sentences("\n".join(section_lines)) if s), "")
+        units = sentence_units(first_sentence) if first_sentence else 0
+        if 1 <= units <= H2_RESTATEMENT_MAX_UNITS:
+            passed += 1
+    return required, passed
+
+
+def analyze_anchor_loop(non_code_text: str) -> tuple[int, int, int, int]:
+    sentences = split_sentences(non_code_text)
+    if not sentences:
+        return 0, 0, 0, 0
+    short_idxs = [
+        idx
+        for idx, sentence in enumerate(sentences)
+        if SHORT_ANCHOR_MIN_UNITS <= sentence_units(sentence) <= SHORT_ANCHOR_MAX_UNITS
+    ]
+    if not short_idxs:
+        return 0, 0, 0, 0
+    total = len(sentences)
+    has_open = int(any(idx < total * 0.3 for idx in short_idxs))
+    has_mid = int(any(total * 0.3 <= idx < total * 0.7 for idx in short_idxs))
+    has_end = int(any(idx >= total * 0.7 for idx in short_idxs))
+    return has_open, has_mid, has_end, has_open + has_mid + has_end
+
+
+def count_short_break_sentences(non_code_text: str) -> int:
+    sentences = split_sentences(non_code_text)
+    return sum(
+        1
+        for sentence in sentences
+        if SHORT_BREAK_MIN_UNITS <= sentence_units(sentence) <= SHORT_BREAK_MAX_UNITS
+    )
+
+
 def apply_profile_gates(
     profile: str,
     metrics: dict[str, float | int],
@@ -186,6 +280,44 @@ def apply_profile_gates(
                     level,
                     code,
                     f"profile={profile}: {metric_key}={value} below required threshold {threshold}",
+                )
+            )
+
+    if int(rules.get("require_h2_restatement", 0)) == 1:
+        required = int(metrics.get("h2_restatement_required", 0))
+        passed = int(metrics.get("h2_restatement_pass", 0))
+        if required > 0 and passed < required:
+            issues.append(
+                Issue(
+                    "error",
+                    "PROFILE_RESTATEMENT_FLOOR",
+                    f"profile={profile}: h2 restatement coverage {passed}/{required} below required full coverage",
+                )
+            )
+
+    if int(rules.get("require_anchor_loop", 0)) == 1:
+        anchor_score = int(metrics.get("anchor_loop_score", 0))
+        if anchor_score < 3:
+            issues.append(
+                Issue(
+                    "error",
+                    "PROFILE_ANCHOR_LOOP",
+                    f"profile={profile}: anchor loop coverage={anchor_score}/3; need opening+middle+ending short anchors",
+                )
+            )
+
+    words_per_anchor = int(rules.get("short_break_words_per_anchor", 0))
+    if words_per_anchor > 0:
+        words = int(metrics.get("word_count", 0))
+        required_breaks = 0 if words < 350 else math.ceil(words / words_per_anchor)
+        short_breaks = int(metrics.get("short_break_sentence_count", 0))
+        metrics["required_short_break_sentence_count"] = required_breaks
+        if short_breaks < required_breaks:
+            issues.append(
+                Issue(
+                    "error",
+                    "PROFILE_SHORT_BREAK_FLOOR",
+                    f"profile={profile}: short break sentences={short_breaks} below required {required_breaks}",
                 )
             )
 
@@ -308,6 +440,15 @@ def analyze(
         "table_count": count_markdown_tables(non_code_only_lines),
     }
     metrics.update(compute_evidence_pack(text))
+    h2_required, h2_pass = analyze_h2_restatement(non_code_lines)
+    metrics["h2_restatement_required"] = h2_required
+    metrics["h2_restatement_pass"] = h2_pass
+    open_anchor, mid_anchor, end_anchor, anchor_score = analyze_anchor_loop(non_code_text)
+    metrics["anchor_opening_present"] = open_anchor
+    metrics["anchor_middle_present"] = mid_anchor
+    metrics["anchor_ending_present"] = end_anchor
+    metrics["anchor_loop_score"] = anchor_score
+    metrics["short_break_sentence_count"] = count_short_break_sentences(non_code_text)
 
     issues: list[Issue] = []
 
@@ -498,6 +639,10 @@ def build_report(input_path: Path, metrics: dict[str, float | int], issues: list
         f"- Mermaid diagrams: {metrics.get('mermaid_diagram_count', 0)}",
         f"- Markdown tables: {metrics.get('table_count', 0)}",
         f"- Case marker hits: {metrics.get('case_marker_hits', 0)}",
+        f"- H2 restatement coverage: {metrics.get('h2_restatement_pass', 0)}/{metrics.get('h2_restatement_required', 0)}",
+        f"- Anchor loop score: {metrics.get('anchor_loop_score', 0)}/3",
+        f"- Short break sentences (10-16 units): {metrics.get('short_break_sentence_count', 0)}",
+        f"- Required short break sentences: {metrics.get('required_short_break_sentence_count', 0)}",
     ]
 
     if "baseline_word_count" in metrics:
