@@ -168,6 +168,24 @@ Rule:
 - fix all hard-gate failures before proceeding
 - warning gates require explicit human judgment in report
 
+## Step 6.5: Run weighted self-check (recommended)
+
+Files:
+
+- `references/agent-gate-rubric.md`
+- `references/human-writing-patterns.md`
+
+Use the weighted formula as drafting self-check:
+
+`Final = 0.35*专业性 + 0.30*可验证性 + 0.20*社区美誉度 + 0.15*(10 - AI嫌疑风险)`
+
+Rule:
+
+- self-check is guidance, not a script hard gate
+- do not lower evidence density just to reduce AI-risk
+- record dimension scores, final score, and assumptions in `review_report.md`
+- if self-check `< 7.0`, revise before moving to final agent gate
+
 ## Step 7: Run agent gate review
 
 File:

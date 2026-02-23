@@ -31,6 +31,22 @@ Mapping guidance:
 - 社区美誉度: publish suitability + portability/adoptability
 - AI嫌疑风险: slogan density, template smell, unsupported abstraction level
 
+## 1.2 Draft Self-Check Mode (Recommended)
+
+During drafting, the same weighted formula can be used as a pre-gate self-check.
+
+Recommended usage:
+
+- run once after first full draft and once after major rewrite,
+- record four aggregate scores + assumptions in `review_report.md`,
+- treat `<7.0` as "revise before final review".
+
+Guardrails:
+
+- this is not a script hard gate,
+- final release still depends on hard gates + severity findings,
+- do not optimize by dropping concrete evidence only to reduce AI-risk.
+
 ## 2. Severity Model
 
 - `P1`: release-critical risk; must revise before completion
@@ -72,7 +88,7 @@ fix: <smallest effective correction>
 
 ## 5. Review Procedure
 
-1. Score all six dimensions.
+1. Score all eight dimensions.
 2. For medium/high complexity topics, explicitly score evidence-pack retention vs baseline.
 3. Emit findings ordered by severity.
 4. Decide `approve` or `revise` using policy.

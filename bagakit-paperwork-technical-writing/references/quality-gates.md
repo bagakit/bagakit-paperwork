@@ -42,6 +42,11 @@ Warning gates do not auto-block release, but cannot be silently ignored.
 | mechanical short-sequence style | repeated short sequence sentences (for example continuous `先X。再Y。`) | merge/expand with causal evidence sentence to avoid robotic cadence |
 | fragment sentence dense | too many fragment-like short lines in body | clean residual fragments and restore coherent sentence flow |
 
+Weighted score formula note:
+
+- The weighted formula in `references/agent-gate-rubric.md` is recommended for writer self-check and final comparison.
+- It is not a script hard gate and cannot replace hard-gate pass requirements.
+
 ## 3. Review Recording Contract
 
 For every warning gate that remains:

@@ -16,6 +16,7 @@ Deliver technical writing that is readable for publication and actionable for ex
 - Prevent regression by carrying forward proven strengths from prior versions.
 - Prevent high-compression rewrites from dropping baseline evidence classes.
 - Default to full first-draft quality instead of incremental short scaffolds.
+- Reuse advanced human-writing patterns as in-skill guidance overlays, without creating child skills.
 
 ## When to Use This Skill
 
@@ -108,29 +109,34 @@ Deliver technical writing that is readable for publication and actionable for ex
   - AI-tone lexicon checks are warning-level lint only (see `gate/anti-patterns/ai-tone-terms.txt`); final rewrite judgment is human/agent review.
   - ending uses either `three-question close (goal/status/next step)` or `one-line key-claim recap`.
 
-6. Split publication and execution content.
+6. Run pre-gate self-check (recommended, non-blocking).
+- Apply one writer loop from `references/human-writing-patterns.md`: context transfer, section option curation, and blind reader test.
+- Compute the weighted score from `references/agent-gate-rubric.md` and record assumptions in `review_report.md`.
+- This self-check is guidance for drafting quality and cannot override hard-gate failures.
+
+7. Split publication and execution content.
 - Main article explains why the approach is correct.
 - Execution appendix defines how to run, verify, and recover.
 - If process fields are needed for traceability, write them only in appendix/report.
 
-7. Run program hard gate checks.
+8. Run program hard gate checks.
 - Run `python3 scripts/check-article.py --input <article.md> --strict --profile <profile> --report <review_report.md>`.
 - Fix all `errors` before publishing.
 - For any rewrite task, `--baseline <previous_article.md>` is required; do not skip baseline comparison.
 - Treat high-compression + evidence-class drop as release-blocking regression.
 - For high-content baseline rewrites, compression over 45% requires explicit scope-cut note; otherwise block release.
 
-8. Run program warning review and agent gate.
+9. Run program warning review and agent gate.
 - Review warnings from checker with explicit decisions in `review_report.md`.
 - Score with `references/agent-gate-rubric.md` and emit findings (`P1/P2/P3` + file/line + fix direction).
 - If any `P1` remains open, status is `revise` and release is blocked.
 
-9. Run optional expert-forum review for high-stakes topics.
+10. Run optional expert-forum review for high-stakes topics.
 - Use `lightning_talk_forum` to converge quickly.
 - Use `deep_dive_forum` when one claim is controversial or high-risk.
 - Keep references, scoring, and claim/tool validation traceable.
 
-10. Final handoff.
+11. Final handoff.
 - Publish `article.md`.
 - Store `execution_appendix.md` and `review_report.md` for downstream implementation.
 
@@ -159,6 +165,7 @@ Deliver technical writing that is readable for publication and actionable for ex
   - Suspicious content shrink relative to baseline draft.
   - Memory-anchor quality and ending recall closure are agent-reviewed warnings.
   - `brainstorm` sampling metadata completeness is warning-reviewed (object/size/window/review role).
+  - Weighted score formula is for review/self-check guidance, not script-level pass/fail.
 
 See details in `references/quality-gates.md`.
 
@@ -194,8 +201,10 @@ bash scripts/validate-skill.sh
 - `references/start-here.md`
 - `references/quality-gates.md`
 - `references/writing-techniques.md`
+- `references/human-writing-patterns.md`
 - `references/markdown-formatting.md`
 - `references/agent-gate-rubric.md`
+- `references/discovery/discovery-log.md`
 - `references/tpl/article-template.md`
 - `references/tpl/execution-appendix-template.md`
 - `references/tpl/review-report-template.md`

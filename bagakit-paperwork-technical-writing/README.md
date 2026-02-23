@@ -25,6 +25,8 @@ Recent guardrails:
 - enforce readability floors (H2 restatable propositions, anchor loop, long-sentence ratio<25%, short breaks)
 - keep memory-hook quality in agent-gate review (heuristic hints only)
 - keep AI-tone lexicon checks as warning-only lint via `gate/anti-patterns/ai-tone-terms.txt`
+- use weighted score formula as recommended drafting self-check (non-blocking)
+- add human-writing pattern overlay guidance without introducing child skills
 
 ## What ships in this package
 
@@ -38,6 +40,10 @@ Recent guardrails:
   hard/warning gate definitions and release policy
 - `references/agent-gate-rubric.md`
   scoring and finding format for agent-led review
+- `references/human-writing-patterns.md`
+  advanced writing-loop overlay and weighted self-check guidance
+- `references/discovery/discovery-log.md`
+  discovery evidence for adopted external patterns and rationale
 - `references/tpl/*.md`
   templates for article, execution appendix, and review report
 - `gate/anti-patterns/*`
@@ -76,10 +82,11 @@ Recommended:
 1. Define reader, task, and decision boundary.
 2. Outline first (`H2` in 3-5 range, `H3` as scan anchors).
 3. Draft with evidence chain.
-4. Run `check-article.py` and fix hard failures.
-5. Run baseline comparison when previous version exists.
-6. Record warning + agent-gate judgments in `review_report.md`.
-7. Hand off with explicit destination and status.
+4. Run weighted self-check and revise weak dimensions.
+5. Run `check-article.py` and fix hard failures.
+6. Run baseline comparison when previous version exists.
+7. Record warning + agent-gate judgments in `review_report.md`.
+8. Hand off with explicit destination and status.
 
 ## Quick start
 
