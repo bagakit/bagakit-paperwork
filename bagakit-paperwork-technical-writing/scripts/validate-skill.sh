@@ -2,6 +2,9 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SKILL_MAKER_CMD="${ROOT_DIR}/../../bagakit-skill-maker/scripts/bagakit_skill_maker.sh"
+
+sh "${SKILL_MAKER_CMD}" runtime-gate --skill-dir "${ROOT_DIR}" >/dev/null
 
 required=(
   "${ROOT_DIR}/SKILL.md"
